@@ -3,8 +3,6 @@ const morgan = require('morgan');
 const mysqlConnection = require('./database.js');
 const app = express();
 
-
-app.use(morgan('dev'));
 app.use(express.urlencoded({
     extended: false
 }));

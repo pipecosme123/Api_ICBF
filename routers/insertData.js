@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const mysqlConnection = require('./database.js');
 const app = express();
 
-app.use(morgan('dev'));
 app.use(express.urlencoded({
     extended: false
 }));
@@ -77,7 +76,7 @@ app.post('/infoPaciente', (req, res) => {
 app.post('/antecedentes', (req, res) => {
 
     const {
-        documentoPaciente,
+        idPaciente,
         ultimaConsulta,
         motivoConsulta,
         motivoConsulta_cual,
@@ -107,10 +106,10 @@ app.post('/antecedentes', (req, res) => {
         experiencias
     } = req.body;
 
-    const query = "INSERT INTO Antecedentes VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+    const query = "INSERT INTO Antecedentes VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NULL,NULL);"
 
     mysqlConnection.query(query, [
-        documentoPaciente,
+        idPaciente,
         ultimaConsulta,
         motivoConsulta,
         motivoConsulta_cual,
@@ -141,7 +140,7 @@ app.post('/antecedentes', (req, res) => {
     ], 
     (err, row, fields) => {
         if (!err) {
-            res.json(row);
+            res.json(1);
         } else {
             console.log(err);
         }
